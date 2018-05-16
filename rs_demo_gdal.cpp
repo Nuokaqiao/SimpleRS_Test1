@@ -8,7 +8,7 @@ RS_DEMO_GDAL::RS_DEMO_GDAL(QWidget *parent) :
     ui->setupUi(this);
 
     init_ui();//initialize ui
-    //std::cout << "init ui ok" << endl;
+    //std::cout << "init ui ok" << endl;//
     init_signal_slot();//initialize signals and slots
     //std::cout << "init signal & slot ok" << endl;
 }
