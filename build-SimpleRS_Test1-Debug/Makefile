@@ -51,10 +51,14 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../main.cpp \
-		../rs_demo_gdal.cpp moc_rs_demo_gdal.cpp
+		../rs_demo_gdal.cpp \
+		../scrollpicview.cpp moc_rs_demo_gdal.cpp \
+		moc_scrollpicview.cpp
 OBJECTS       = main.o \
 		rs_demo_gdal.o \
-		moc_rs_demo_gdal.o
+		scrollpicview.o \
+		moc_rs_demo_gdal.o \
+		moc_scrollpicview.o
 DIST          = /home/apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/common/unix.conf \
 		/home/apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/common/linux.conf \
@@ -215,8 +219,10 @@ DIST          = /home/apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/features/spec_pre.prf 
 		/home/apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/features/exceptions.prf \
 		/home/apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/features/yacc.prf \
 		/home/apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/features/lex.prf \
-		../../SimpleRS_Test1.pro ../rs_demo_gdal.h ../main.cpp \
-		../rs_demo_gdal.cpp
+		../../SimpleRS_Test1.pro ../rs_demo_gdal.h \
+		../scrollpicview.h ../main.cpp \
+		../rs_demo_gdal.cpp \
+		../scrollpicview.cpp
 QMAKE_TARGET  = SimpleRS_Test1
 DESTDIR       = 
 TARGET        = SimpleRS_Test1
@@ -572,8 +578,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../rs_demo_gdal.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../main.cpp ../rs_demo_gdal.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../rs_demo_gdal.h ../scrollpicview.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../main.cpp ../rs_demo_gdal.cpp ../scrollpicview.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../rs_demo_gdal.ui $(DISTDIR)/
 
 
@@ -606,9 +612,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../../apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../../../apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_rs_demo_gdal.cpp
+compiler_moc_header_make_all: moc_rs_demo_gdal.cpp moc_scrollpicview.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_rs_demo_gdal.cpp
+	-$(DEL_FILE) moc_rs_demo_gdal.cpp moc_scrollpicview.cpp
 moc_rs_demo_gdal.cpp: ui_rs_demo_gdal.h \
 		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/QVariant \
 		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qvariant.h \
@@ -820,6 +826,128 @@ moc_rs_demo_gdal.cpp: ui_rs_demo_gdal.h \
 		moc_predefs.h \
 		../../../../apps/Qt5.10.1/5.10.1/gcc_64/bin/moc
 	/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/linux-g++ -I/home/shi/dev/Qt/SimpleRS_Test1 -I/home/shi/lib/gdal/include -I/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/include -I/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets -I/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui -I/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../rs_demo_gdal.h -o moc_rs_demo_gdal.cpp
+
+moc_scrollpicview.cpp: ../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/QGraphicsView \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qgraphicsview.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qtguiglobal.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qflags.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qmutex.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qtgui-config.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpainter.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qrect.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qmargins.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qsize.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qpoint.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpixmap.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qcolor.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qrgb.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qlist.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstring.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qchar.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qpair.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qregexp.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qrgba64.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qshareddata.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qhash.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qobject.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qimage.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpixelformat.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qtransform.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qmatrix.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpolygon.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qvector.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qregion.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qdatastream.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qiodevice.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qline.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpainterpath.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qtextoption.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpen.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qbrush.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qfontinfo.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qfont.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qframe.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qwidget.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpalette.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qcursor.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qkeysequence.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qevent.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qvariant.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qmap.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qdebug.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qtextstream.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qlocale.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qset.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qurl.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qurlquery.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qfile.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qvector2d.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qtouchdevice.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/QGraphicsScene \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/QImage \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/QPen \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/QScrollBar \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qscrollbar.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		../scrollpicview.h \
+		moc_predefs.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/bin/moc
+	/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/mkspecs/linux-g++ -I/home/shi/dev/Qt/SimpleRS_Test1 -I/home/shi/lib/gdal/include -I/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/include -I/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets -I/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui -I/home/shi/apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore -I. -I/usr/include/c++/5 -I/usr/include/x86_64-linux-gnu/c++/5 -I/usr/include/c++/5/backward -I/usr/lib/gcc/x86_64-linux-gnu/5/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../scrollpicview.h -o moc_scrollpicview.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1262,8 +1390,131 @@ rs_demo_gdal.o: ../rs_demo_gdal.cpp ../rs_demo_gdal.h \
 		../../../../lib/gdal/include/cpl_atomic_ops.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rs_demo_gdal.o ../rs_demo_gdal.cpp
 
+scrollpicview.o: ../scrollpicview.cpp ../scrollpicview.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/QGraphicsView \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qgraphicsview.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qtguiglobal.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qflags.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qmutex.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qtgui-config.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpainter.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qrect.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qmargins.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qsize.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qpoint.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpixmap.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpaintdevice.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qcolor.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qrgb.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qlist.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstring.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qchar.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qpair.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qregexp.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qrgba64.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qshareddata.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qhash.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qobject.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qimage.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpixelformat.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qtransform.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qmatrix.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpolygon.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qvector.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qregion.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qdatastream.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qiodevice.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qline.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpainterpath.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qtextoption.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpen.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qbrush.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qfontinfo.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qfont.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qfontmetrics.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qframe.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qwidget.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qpalette.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qsizepolicy.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qcursor.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qkeysequence.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qevent.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qvariant.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qmap.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qdebug.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qtextstream.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qlocale.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qset.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qurl.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qurlquery.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qfile.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtCore/qfiledevice.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qvector2d.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/qtouchdevice.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/QGraphicsScene \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/QImage \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtGui/QPen \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/QScrollBar \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qscrollbar.h \
+		../../../../apps/Qt5.10.1/5.10.1/gcc_64/include/QtWidgets/qabstractslider.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o scrollpicview.o ../scrollpicview.cpp
+
 moc_rs_demo_gdal.o: moc_rs_demo_gdal.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_rs_demo_gdal.o moc_rs_demo_gdal.cpp
+
+moc_scrollpicview.o: moc_scrollpicview.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_scrollpicview.o moc_scrollpicview.cpp
 
 ####### Install
 
